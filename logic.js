@@ -2,13 +2,14 @@
 
 const key = '5ea363cd1fe377e3ae1dcc973693a928';
 const baseURL = 'https://api.themoviedb.org/3/';
+const srchResDivVar = document.getElementById('srchResDiv');
+
 
 //takes the input value and search DB with it
 let search = function() {
     let title = document.getElementById("srchInp").value;
-    const srchResDiv = document.getElementById('srchResDiv');
-    srchResDiv.innerHTML = '';
-    let url = ''.concat(baseURL, 'search/movie?api_key=', key, '&query=', title);
+    srchResDivVar.innerHTML = '';
+    let url = `${baseURL}search/movie?api_key=${key}&query=${title}`;
 
     fetch(url)
         .then((result) => {
@@ -44,16 +45,16 @@ function populateSearchData(filmsData) {
         newT.className = 'insideResEl';
         const line = document.createElement('hr');
         line.className = 'line';
-        srchResDiv.appendChild(newH);
-        srchResDiv.appendChild(newI);
-        srchResDiv.appendChild(newT);
-        srchResDiv.appendChild(line);
+        srchResDivVar.appendChild(newH);
+        srchResDivVar.appendChild(newI);
+        srchResDivVar.appendChild(newT);
+        srchResDivVar.appendChild(line);
     });
 }
 
 //get to Films
 let topTen = function() {
-        let url = ''.concat(baseURL, 'movie/top_rated?api_key=', key, '&language=en-US&page=1');
+        let url = `${baseURL}movie/top_rated?api_key=${key}&language=en-US&page=1`;
 
         fetch(url)
             .then((result) => {
