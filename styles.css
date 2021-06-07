@@ -15,7 +15,7 @@
     border-bottom: 3px solid black;
 }
 
-.insideResEl {
+.srchResDivClass * {
     width: 250px;
     margin: 0px auto;
     text-align: center;
@@ -24,4 +24,16 @@
 .line {
     border-bottom: 3px solid black;
     border-top: 0px;
+}
+
+.paginationClass {
+    margin: 0px auto;
+    background-color: aqua;
+    width: 50%;
+    padding: 10px;
+}
+
+.paginationClass a {
+    display: inline-block;
+    color: black;
 }

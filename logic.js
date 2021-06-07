@@ -27,6 +27,8 @@ let search = async function() {
 
 //populates the result data into the result Div
 function populateSearchData(filmsData) {
+    paginate(filmsData);
+    console.log('filmsData', filmsData)
     const srchResDivVar = document.getElementById('srchResDiv');
     const newD = document.createElement('div');
     newD.className = "srchResDivClass";
@@ -34,13 +36,10 @@ function populateSearchData(filmsData) {
     filmsData.forEach(element => {
         const newH = document.createElement('h2');
         newH.innerText = element.title;
-        newH.className = 'insideResEl';
         const newI = document.createElement('img');
-        newI.className = 'insideResEl';
         newI.src = element.image;
         const newT = document.createElement('p');
         newT.innerText = element.description;
-        newT.className = 'insideResEl';
         const line = document.createElement('hr');
         line.className = 'line';
         newD.appendChild(newH);
@@ -49,6 +48,31 @@ function populateSearchData(filmsData) {
         newD.appendChild(line);
     });
     srchResDivVar.replaceWith(newD);
+}
+
+//pagination function
+function paginate(arr) {
+    const paginationDivVar = document.getElementById('paginationDiv');
+    let pageSize = 10;
+    let pages = arr.length / pageSize;
+
+    const newPag = document.createElement('div');
+    newPag.className = "paginationClass";
+    newPag.setAttribute('id', 'paginationDiv');
+
+    for (var i = 0; i < pages; i++) {
+        const newP = document.createElement('a');
+        newP.innerHTML = i + 1;
+        newP.onclick = pageChange(newP.innerHTML);
+        newPag.appendChild(newP);
+
+    }
+    paginationDivVar.replaceWith(newPag);
+}
+
+//page change
+function pageChange(page) {
+    console.log('pageChange', page)
 }
 
 //get to Films
