@@ -2,9 +2,11 @@
 
 const key = '5ea363cd1fe377e3ae1dcc973693a928';
 const baseURL = 'https://api.themoviedb.org/3/';
+let currPage;
 
 //takes the input value and search DB with it
 let search = async function() {
+    currPage = 1;
     const srchResDivVar = document.getElementById('srchResDiv');
     let title = document.getElementById("srchInp").value;
     srchResDivVar.innerHTML = '';
@@ -24,12 +26,11 @@ let search = async function() {
     })
     sessionStorage.setItem("foundFilma", JSON.stringify(filmsData));
     populateSearchData(filmsData);
+    paginate(filmsData);
 }
 
 //populates the result data into the result Div
 function populateSearchData(filmsData) {
-
-    paginate(filmsData);
 
     const srchResDivVar = document.getElementById('srchResDiv');
     let pageData = filmsData.slice(0, 10);
@@ -82,16 +83,21 @@ function paginate(arr) {
     //pagination event listners
     document.querySelectorAll('.pagButton').forEach(item => {
         item.addEventListener('click', event => {
-            let pageData = pageChange(item.innerHTML);
+            let pageData = pageChange(item.innerHTML, pages);
             populateSearchData(pageData);
         })
     })
 }
 
 //page change
-function pageChange(page) {
+function pageChange(page, pages) {
+    if (page === '«') currPage = 1;
+    else if (page === '»') currPage = pages;
+    else if (page === '←') currPage = currPage - 1;
+    else if (page === '→') currPage = currPage + 1;
+    else currPage = page;
     let filmsData = JSON.parse(sessionStorage.getItem("foundFilma"));
-    return filmsData.slice((page - 1) * 10, page * 10);
+    return filmsData.slice((currPage - 1) * 10, currPage * 10);
 }
 
 //get to Films
