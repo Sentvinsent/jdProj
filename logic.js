@@ -22,18 +22,25 @@ let search = async function() {
         };
         return fimsDataObj;
     })
+    sessionStorage.setItem("foundFilma", JSON.stringify(filmsData));
     populateSearchData(filmsData);
 }
 
 //populates the result data into the result Div
 function populateSearchData(filmsData) {
+
     paginate(filmsData);
-    console.log('filmsData', filmsData)
+
     const srchResDivVar = document.getElementById('srchResDiv');
+    let pageData = filmsData.slice(0, 10);
+
     const newD = document.createElement('div');
     newD.className = "srchResDivClass";
     newD.setAttribute('id', 'srchResDiv');
-    filmsData.forEach(element => {
+
+
+
+    pageData.forEach(element => {
         const newH = document.createElement('h2');
         newH.innerText = element.title;
         const newI = document.createElement('img');
@@ -47,32 +54,44 @@ function populateSearchData(filmsData) {
         newD.appendChild(newT);
         newD.appendChild(line);
     });
+
     srchResDivVar.replaceWith(newD);
 }
 
 //pagination function
 function paginate(arr) {
     const paginationDivVar = document.getElementById('paginationDiv');
-    let pageSize = 10;
-    let pages = arr.length / pageSize;
+    const nextPageVar = document.getElementById('nextPage');
 
-    const newPag = document.createElement('div');
+    let pageSize = 10;
+    let pages = Math.ceil(arr.length / pageSize);
+
+    const newPag = document.createElement('span');
     newPag.className = "paginationClass";
-    newPag.setAttribute('id', 'paginationDiv');
+    //newPag.setAttribute('id', 'paginationDiv');
 
     for (var i = 0; i < pages; i++) {
-        const newP = document.createElement('a');
+        const newP = document.createElement('button');
+        newP.className = 'pagButton';
         newP.innerHTML = i + 1;
-        newP.onclick = pageChange(newP.innerHTML);
         newPag.appendChild(newP);
-
     }
-    paginationDivVar.replaceWith(newPag);
+
+    paginationDivVar.insertBefore(newPag, nextPageVar);
+
+    //pagination event listners
+    document.querySelectorAll('.pagButton').forEach(item => {
+        item.addEventListener('click', event => {
+            let pageData = pageChange(item.innerHTML);
+            populateSearchData(pageData);
+        })
+    })
 }
 
 //page change
 function pageChange(page) {
-    console.log('pageChange', page)
+    let filmsData = JSON.parse(sessionStorage.getItem("foundFilma"));
+    return filmsData.slice((page - 1) * 10, page * 10);
 }
 
 //get to Films

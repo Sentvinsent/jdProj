@@ -33,7 +33,7 @@
     padding: 10px;
 }
 
-.paginationClass a {
+.paginationClass button {
     display: inline-block;
     color: black;
 }
