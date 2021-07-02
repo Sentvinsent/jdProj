@@ -1,62 +1,68 @@
 .srchDiv {
     background-color: aqua;
-    width: 50%;
-    margin: 0px auto;
-    padding: 10px;
-    border-bottom: 3px solid black;
+    width           : 50%;
+    margin          : 0px auto;
+    padding         : 10px;
+    border-bottom   : 3px solid black;
 }
 
 .srchResDivClass {
     background-color: aqua;
-    width: 50%;
-    margin: 0px auto;
-    padding: 10px;
-    text-align: center;
-    border-bottom: 3px solid black;
+    width           : 50%;
+    margin          : 0px auto;
+    padding         : 10px;
+    text-align      : center;
+    border-bottom   : 3px solid black;
 }
 
 .srchResDivClass * {
-    width: 250px;
-    margin: 0px auto;
+    width     : 250px;
+    margin    : 0px auto;
     text-align: center;
 }
 
 .line {
     border-bottom: 3px solid black;
-    border-top: 0px;
+    border-top   : 0px;
 }
 
 
 /* pagination */
 
+.pagination {
+    width     : 50%;
+    margin    : 0px auto;
+    text-align: center;
+}
+
 .pagination ul {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    background: #fff;
-    padding: 8px;
+    width        : 100%;
+    display      : flex;
+    flex-wrap    : wrap;
+    background   : #fff;
+    padding      : 8px;
     border-radius: 50px;
-    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    box-shadow   : 0px 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 .pagination ul li {
-    color: #000000;
-    list-style: none;
+    color      : #000000;
+    list-style : none;
     line-height: 45px;
-    text-align: center;
-    font-size: 18px;
+    text-align : center;
+    font-size  : 18px;
     font-weight: 500;
-    cursor: pointer;
+    cursor     : pointer;
     user-select: none;
-    transition: all 0.3s ease;
+    transition : all 0.3s ease;
 }
 
 .pagination ul li.numb {
-    list-style: none;
-    height: 45px;
-    width: 45px;
-    margin: 0 3px;
-    line-height: 45px;
+    list-style   : none;
+    height       : 45px;
+    width        : 45px;
+    margin       : 0 3px;
+    line-height  : 45px;
     border-radius: 50%;
 }
 
@@ -70,11 +76,11 @@
 
 .pagination ul li.dots {
     font-size: 22px;
-    cursor: default;
+    cursor   : default;
 }
 
 .pagination ul li.btn {
-    padding: 0 20px;
+    padding      : 0 20px;
     border-radius: 50px;
 }
 
@@ -82,6 +88,6 @@
 .pagination ul li.numb:hover,
 .pagination ul li:first-child:hover,
 .pagination ul li:last-child:hover {
-    color: #fff;
+    color     : #fff;
     background: #000000;
 }
