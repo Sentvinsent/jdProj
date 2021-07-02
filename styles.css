@@ -26,28 +26,8 @@
     border-top: 0px;
 }
 
-.paginationClass {
-    margin: 0px auto;
-    background-color: aqua;
-    width: 50%;
-    padding: 10px;
-}
-
-.paginationClass button {
-    display: inline-block;
-    color: black;
-}
-
 
 /* pagination */
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
 
 .pagination ul {
     width: 100%;
