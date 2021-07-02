@@ -4,10 +4,9 @@ const key = '5ea363cd1fe377e3ae1dcc973693a928';
 const baseURL = 'https://api.themoviedb.org/3/';
 let totalPages;
 let page = 1;
-//let currPage;
 
 //takes the input value and search DB with it
-let search = async function() {
+let search = async function () {
     const srchResDivVar = document.getElementById('srchResDiv');
     let title = document.getElementById("srchInp").value;
     srchResDivVar.innerHTML = '';
@@ -28,18 +27,14 @@ let search = async function() {
         };
         return fimsDataObj;
     })
-    sessionStorage.setItem("foundFilma", JSON.stringify(filmsData));
     populateSearchData(filmsData, totalPages);
-    //paginate(filmsData);
+    createPagination(totalPages, page);
 }
 
 //populates the result data into the result Div
 function populateSearchData(filmsData, totalPages) {
 
     const srchResDivVar = document.getElementById('srchResDiv');
-    createPagination(totalPages, page);
-    // let pageData = filmsData.slice(0, 10);
-
     const newD = document.createElement('div');
     newD.className = "srchResDivClass";
     newD.setAttribute('id', 'srchResDiv');
@@ -64,55 +59,15 @@ function populateSearchData(filmsData, totalPages) {
     srchResDivVar.replaceWith(newD);
 }
 
-//pagination function
-// function paginate(arr) {
-//     const paginationDivVar = document.getElementById('paginationDiv');
-//     const nextPageVar = document.getElementById('nextPage');
-
-//     let pageSize = 10;
-//     let pages = Math.ceil(arr.length / pageSize);
-
-//     const newPag = document.createElement('span');
-//     newPag.className = "paginationClass";
-//     //newPag.setAttribute('id', 'paginationDiv');
-
-//     for (var i = 0; i < pages; i++) {
-//         const newP = document.createElement('button');
-//         newP.className = 'pagButton';
-//         newP.innerHTML = i + 1;
-//         newPag.appendChild(newP);
-//     }
-
-//     paginationDivVar.insertBefore(newPag, nextPageVar);
-
-//     //pagination event listners
-//     document.querySelectorAll('.pagButton').forEach(item => {
-//         item.addEventListener('click', event => {
-//             let pageData = pageChange(item.innerHTML, pages);
-//             populateSearchData(pageData);
-//         })
-//     })
-// }
-
-// //page change
-// function pageChange(page, pages) {
-//     if (page === '«') currPage = 1;
-//     else if (page === '»') currPage = pages;
-//     else if (page === '←') currPage = currPage - 1;
-//     else if (page === '→') currPage = currPage + 1;
-//     else currPage = page;
-//     let filmsData = JSON.parse(sessionStorage.getItem("foundFilma"));
-//     return filmsData.slice((currPage - 1) * 10, currPage * 10);
-// }
-
 //get to Films
-let topTen = async function() {
+async function topFilms() {
+    let filmsNumber = document.getElementById('topFilms').value;
     let url = `${baseURL}movie/top_rated?api_key=${key}&language=en-US&page=1`;
 
     let result = await fetch(url);
     let data = await result.json();
     let filmsArray = data.results;
-    let filmsData = filmsArray.slice(0, 10).map(obj => {
+    let filmsData = filmsArray.slice(0, filmsNumber).map(obj => {
         let fimsDataObj = {
             'title': obj.title,
             'rating': obj.vote_average,
@@ -126,7 +81,7 @@ let topTen = async function() {
 
 //event listeners
 document.getElementById('srchBtn').addEventListener('click', search);
-document.getElementById('topTenButton').addEventListener('click', topTen);
+document.getElementById('topTenButton').addEventListener('click', topFilms);
 
 
 //pagination

@@ -15,17 +15,16 @@
         <span calss='srchSpan'>
             <input type="text" placeholder="Enter movie title..." id="srchInp" class="srchField">
             <button id="srchBtn" class="srchButton">Search</button>
-            <button id='topTenButton' class='topTenButton'>Show top 10</button>
+            <label for="filmsNumber">Show top:</label>
+            <select name="filmsNumber" id="topFilms">
+                <option value=10>10</option>
+                <option value=20>20</option>
+            </select>
+            <button id='topTenButton' class='topTenButton'>Show</button>
         </span>
     </div>
     <div id="srchResDiv" class="srchResDivClass">
     </div>
-    <!-- <div id='paginationDiv' class="paginationClass">
-        <button id='firstPage' class='pagButton'>&laquo;</button>
-        <button id='prevPage' class='pagButton'>&larr;</button>
-        <button id='nextPage' class='pagButton'>&rarr;</button>
-        <button id='lastPage' class='pagButton'>&raquo;</button>
-    </div> -->
     <div class="pagination">
         <ul>
             <!--pages (li) come from logic.js -->
