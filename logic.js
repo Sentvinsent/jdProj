@@ -61,6 +61,7 @@ function populateSearchData(filmsData, totalPages) {
 
 //get to Films
 async function topFilms() {
+    document.querySelector(".pagination ul").innerHTML = '';
     let filmsNumber = document.getElementById('topFilms').value;
     let url = `${baseURL}movie/top_rated?api_key=${key}&language=en-US&page=1`;
 
