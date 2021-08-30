@@ -110,17 +110,27 @@ function createPagination(totalPages, page) {
     }
 
 
-    //Handle how many pages are shown before the current page
-    if (page == totalPages) {
-        beforePage = beforePage - 2;
-    } else if (page == totalPages - 1) {
-        beforePage = beforePage - 1;
-    }
-    //Handle how many pages are shown after the current page
-    if (page == 1) {
-        afterPage = afterPage + 2;
-    } else if (page == 2) {
-        afterPage = afterPage + 1;
+    //Handle the cases with the different number of total page (In case the total number of page is 3 or less no need to change the beforePage and afterPage variables)
+    if (totalPages > 4) {
+        //Handle how many pages are shown before the current page
+        if (page == totalPages) {
+            beforePage = beforePage - 2;
+        } else if (page == totalPages - 1) {
+            beforePage = beforePage - 1;
+        }
+        //Handle how many pages are shown after the current page
+        if (page == 1) {
+            afterPage = afterPage + 2;
+        } else if (page == 2) {
+            afterPage = afterPage + 1;
+        }
+    } else if (totalPages == 4) {
+        if (page == totalPages) {
+            beforePage = beforePage - 1;
+        }
+        if (page == 1) {
+            afterPage = afterPage + 1;
+        }
     }
 
 
