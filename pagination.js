@@ -2,7 +2,7 @@
 
 //calling function with passing parameters and adding inside element which is ul tag
 
-export function createPagination(totalPages, page) {
+function createPagination(totalPages, page) {
     const paginEl = document.querySelector(".pagination ul");
     let liTag = '';
     let active;
@@ -82,3 +82,5 @@ export function createPagination(totalPages, page) {
     //Add pagination elements html into the ul tag
     paginEl.innerHTML = liTag;
 }
+
+export { createPagination };
