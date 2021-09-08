@@ -12,7 +12,7 @@ function createPagination(totalPages, page) {
 
     //Show the button 'prev' if the page is greater than 1
     if (page > 1) {
-        liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1}), page=${page - 1}, search()"><span><i class="fas fa-angle-left"></i>Prev</span></li>`;
+        liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1}), page=${page - 1}, search()"><span>Prev</span></li>`;
     }
     //Add 1st page if the current page is greater than 2
     if (page > 2) {
@@ -22,7 +22,6 @@ function createPagination(totalPages, page) {
             liTag += `<li class="dots"><span>...</span></li>`;
         }
     }
-
 
     //Handle the cases with the different number of total page (In case the total number of page is 3 or less no need to change the beforePage and afterPage variables)
     if (totalPages > 4) {
@@ -77,7 +76,7 @@ function createPagination(totalPages, page) {
 
     //Show the 'next' button if the current page is less than total pages
     if (page < totalPages) {
-        liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1}), page=${page + 1}, search()"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+        liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1}), page=${page + 1}, search()"><span>Next</span></li>`;
     }
     //Add pagination elements html into the ul tag
     paginEl.innerHTML = liTag;
