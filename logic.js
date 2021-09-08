@@ -1,8 +1,5 @@
 // API reference: https://developers.themoviedb.org/3/getting-started/introduction
 
-
-//imports
-import { createPagination } from "./pagination.js";
 //variables
 const key = '5ea363cd1fe377e3ae1dcc973693a928';
 const baseURL = 'https://api.themoviedb.org/3/';

@@ -82,6 +82,3 @@ function createPagination(totalPages, page) {
     //Add pagination elements html into the ul tag
     paginEl.innerHTML = liTag;
 }
-
-//exports
-export { createPagination };
