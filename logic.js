@@ -31,36 +31,24 @@ let search = async function () {
         };
         return fimsDataObj;
     })
-    populateSearchData(filmsData, totalPages);
+    populateSearchData(filmsData);
     createPagination(totalPages, page);
 }
 
 //populates the result data into the result Div
-function populateSearchData(filmsData, totalPages) {
+function populateSearchData(filmsData) {
 
     const srchResDivVar = document.getElementById('srchResDiv');
-    const newD = document.createElement('div');
-    newD.className = "srchResDivClass";
-    newD.setAttribute('id', 'srchResDiv');
-
-
-
+    let divHtml = '';
     filmsData.forEach(element => {
-        const newH = document.createElement('h2');
-        newH.innerText = element.title;
-        const newI = document.createElement('img');
-        newI.src = element.image;
-        const newT = document.createElement('p');
-        newT.innerText = element.description;
-        const line = document.createElement('hr');
-        line.className = 'line';
-        newD.appendChild(newH);
-        newD.appendChild(newI);
-        newD.appendChild(newT);
-        newD.appendChild(line);
-    });
-
-    srchResDivVar.replaceWith(newD);
+        if (element.image != 'https://image.tmdb.org/t/p/w500/null') {
+            divHtml += `<h2>${element.title}</h2>
+            <img src="${element.image}">
+            <p>${element.description}</p>
+            <hr class='line'>`;
+        }
+    })
+    srchResDivVar.innerHTML = divHtml;
 }
 
 //get to Films

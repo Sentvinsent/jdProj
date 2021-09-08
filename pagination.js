@@ -83,4 +83,5 @@ function createPagination(totalPages, page) {
     paginEl.innerHTML = liTag;
 }
 
+//exports
 export { createPagination };
