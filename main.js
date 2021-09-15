@@ -21,23 +21,7 @@ let search = async function () {
     createPagination(totalPages, page);
 }
 
-//populates the result data into the result Div
-function populateSearchData(filmsData) {
-    const srchResDivVar = document.getElementById('srchResDiv');
-    let divHtml = '';
-    
-    filmsData.forEach(element => {
-        if (element.image != baseImgUrl + 'null') {
-            divHtml += `<h2>${element.title}</h2>
-            <img src="${element.image}">
-            <p>${element.description}</p>
-            <hr class='line'>`;
-        }
-    })
-    srchResDivVar.innerHTML = divHtml;
-}
-
-//get to Films
+//get top Films
 async function topFilms() {
     clearSrch;
     let filmsNumber = document.getElementById('topFilms').value;
@@ -46,29 +30,6 @@ async function topFilms() {
     let filmsData = filmsObjBuild(fetchResult.slice(0, filmsNumber));
     populateSearchData(filmsData);
 }
-
-//building the films object from the fetch results
-function filmsObjBuild(dataObj) {
-    let filmsData = dataObj.map(obj => {
-        let fimsDataObj = {
-            'title': obj.title,
-            'rating': obj.vote_average,
-            'description': obj.overview,
-            'image': baseImgUrl + obj.poster_path
-        };
-        return fimsDataObj;
-    })
-    return filmsData;
-}
-
-//fetch data
-async function loadData(url) {
-    let result = await fetch(url);
-    let data = await result.json();
-    fetchResult = await data.results;
-    totalPages = data.total_pages;
-}
-
 //function to clear the search results
 function clearSrch() {
     document.getElementById('srchResDiv').innerHTML = '';

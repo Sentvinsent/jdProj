@@ -1,7 +1,22 @@
-//pagination
 
-//calling function with passing parameters and adding inside element which is ul tag
 
+//populates the result data into the result Div
+function populateSearchData(filmsData) {
+    const srchResDivVar = document.getElementById('srchResDiv');
+    let divHtml = '';
+
+    filmsData.forEach(element => {
+        if (element.image != baseImgUrl + 'null') {
+            divHtml += `<h2>${element.title}</h2>
+            <img src="${element.image}">
+            <p>${element.description}</p>
+            <hr class='line'>`;
+        }
+    })
+    srchResDivVar.innerHTML = divHtml;
+}
+
+//function that builds pagination based on the passed parameters
 function createPagination(totalPages, page) {
     const paginEl = document.querySelector(".pagination ul");
     let liTag = '';
