@@ -102,3 +102,6 @@ body {
     color     : #fff;
     background: #000000;
 }
+.hidden {
+    display: none;
+}

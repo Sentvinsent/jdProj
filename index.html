@@ -21,7 +21,12 @@
                 <option value=20>20</option>
             </select>
             <button id='topTenButton' class='topTenButton'>Show</button>
+            <button id='filtersBtn' class='topTenButton hidden'>Filter Search</button>
+            <button id='hideFiltersBtn' class='topTenButton hidden'>Close filters</button>
         </span>
+    </div>
+    <div id ='filersDiv' class="srchDiv hidden">
+        <select id="genreSel"></select>
     </div>
     <div id="srchResDiv" class="srchResDivClass">
     </div>
@@ -35,5 +40,6 @@
 <script src="main.js" defer></script>
 <script src="elements.js" defer></script>
 <script src="data.js" defer></script>
+<script src="events.js" defer></script>
 
 </html>

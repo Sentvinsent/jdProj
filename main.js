@@ -7,6 +7,7 @@ const baseImgUrl = 'https://image.tmdb.org/t/p/w500/';
 
 let fetchResult;
 let totalPages;
+let genres;
 let page = 1;
 
 //takes the input value and search DB with it
@@ -19,6 +20,9 @@ let search = async function () {
     await loadData(url);
     populateSearchData(filmsObjBuild(fetchResult));
     createPagination(totalPages, page);
+    genreDropBuild(genres);
+    showFilBtn();
+    
 }
 
 //get top Films
@@ -34,8 +38,21 @@ async function topFilms() {
 function clearSrch() {
     document.getElementById('srchResDiv').innerHTML = '';
     document.querySelector(".pagination ul").innerHTML = '';
+    document.getElementById('filersDiv').classList.add('hidden');
+    document.getElementById('filtersBtn').classList.add('hidden');
 }
-//event listeners
-document.getElementById('srchBtn').addEventListener('click', search);
-document.getElementById('topTenButton').addEventListener('click', topFilms);
-document.getElementById('clearBtn').addEventListener('click', clearSrch)
+
+//function to show filters
+function showFilters() {
+    console.log (document.getElementById('genreSel').value);
+    document.getElementById('filersDiv').classList.remove('hidden');
+    document.getElementById('filtersBtn').classList.add('hidden');
+    document.getElementById('hideFiltersBtn').classList.remove('hidden');
+}
+
+//
+function showFilBtn(){
+    document.getElementById('filersDiv').classList.add('hidden');
+    document.getElementById('filtersBtn').classList.remove('hidden');
+    document.getElementById('hideFiltersBtn').classList.add('hidden');
+}

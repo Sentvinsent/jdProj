@@ -96,3 +96,15 @@ function createPagination(totalPages, page) {
     //Add pagination elements html into the ul tag
     paginEl.innerHTML = liTag;
 }
+
+//building the genres dropdown
+function genreDropBuild(genArray) {
+    const genreDropVar = document.getElementById('genreSel');
+    let selHtml = `<option value=''>Any</option>`;
+    console.log('gen', genArray)
+    genArray.forEach(element => {
+        selHtml += `<option value=${element.id}>${element.name}</option>`
+       
+    })
+    genreDropVar.innerHTML = selHtml;
+}
