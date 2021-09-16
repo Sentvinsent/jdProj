@@ -7,11 +7,7 @@ async function loadData(url) {
     genres = await gen.genres;
     fetchResult = await data.results;
     totalPages = data.total_pages;
-
-    let testFetchUrl = `${baseURL}search/movie?api_key=${key}&query=test`;
-    let testRes = await fetch(testFetchUrl);
-    let testData = await testRes.json();
-    console.log ('test Data', testData)
+    console.log ('test Data', fetchResult)
 }
 
 //building the films object from the fetch results
@@ -30,8 +26,8 @@ function filmsObjBuild(dataObj) {
 }
 
 //genres filter function
-function genreFilter(genre) {
-    let filmsObj = JSON.parse(sessionStorage.getItem('fimsDataObj'));
-    console.log('films', filmsObj);
+// function genreFilter(genre) {
+//     let filmsObj = JSON.parse(sessionStorage.getItem('fimsDataObj'));
+//     console.log('films', filmsObj);
 
-}
+// }

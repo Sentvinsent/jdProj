@@ -50,7 +50,7 @@ function showFilters() {
     document.getElementById('hideFiltersBtn').classList.remove('hidden');
 }
 
-//
+//funtion to display the button that shows filters
 function showFilBtn(){
     document.getElementById('filersDiv').classList.add('hidden');
     document.getElementById('filtersBtn').classList.remove('hidden');
