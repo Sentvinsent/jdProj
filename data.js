@@ -27,11 +27,3 @@ function filmsObjBuild(dataObj) {
     })
     return filmsData;
 }
-
-//Discover films passing the selected parameters into the fetch request
-async function loadDiscData(url) {
-    let discFetch = await fetch(url);
-    let data = await discFetch.json();
-    fetchResult = await data.results;
-    totalPages = data.total_pages;
-}
