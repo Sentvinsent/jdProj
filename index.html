@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="srchDiv">
+    <div id='srchDiv' class="srchDiv">
         <span calss='srchSpan'>
             <input type="text" placeholder="Enter movie title..." id="srchInp" class="srchField">
             <button id="srchBtn" class="srchButton">Search</button>
@@ -21,12 +21,12 @@
                 <option value=20>20</option>
             </select>
             <button id='topTenButton' class='topTenButton'>Show</button>
-            <button id='filtersBtn' class='topTenButton hidden'>Filter Search</button>
-            <button id='hideFiltersBtn' class='topTenButton hidden'>Close filters</button>
+            <button id='filtersBtn' class='topTenButton'>Discover Films</button>
         </span>
     </div>
-    <div id ='filersDiv' class="srchDiv hidden">
+    <div id='filersDiv' class="srchDiv hidden">
         <select id="genreSel"></select>
+        <button id='hideFiltersBtn' class='topTenButton'>Back to Search</button>
     </div>
     <div id="srchResDiv" class="srchResDivClass">
     </div>

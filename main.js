@@ -14,15 +14,14 @@ let page = 1;
 let search = async function () {
     clearSrch;
 
+    let method = 'search';
     let title = document.getElementById("srchInp").value;
     let url = `${baseURL}search/movie?api_key=${key}&query=${title}&page=${page}`;
 
     await loadData(url);
     populateSearchData(filmsObjBuild(fetchResult));
-    createPagination(totalPages, page);
-    genreDropBuild(genres);
-    showFilBtn();
-    
+    createPagination(totalPages, page, method);
+    page = 1;
 }
 
 //get top Films
@@ -34,25 +33,13 @@ async function topFilms() {
     let filmsData = filmsObjBuild(fetchResult.slice(0, filmsNumber));
     populateSearchData(filmsData);
 }
-//function to clear the search results
-function clearSrch() {
-    document.getElementById('srchResDiv').innerHTML = '';
-    document.querySelector(".pagination ul").innerHTML = '';
-    document.getElementById('filersDiv').classList.add('hidden');
-    document.getElementById('filtersBtn').classList.add('hidden');
-}
 
-//function to show filters
-function showFilters() {
-    console.log (document.getElementById('genreSel').value);
-    document.getElementById('filersDiv').classList.remove('hidden');
-    document.getElementById('filtersBtn').classList.add('hidden');
-    document.getElementById('hideFiltersBtn').classList.remove('hidden');
-}
-
-//funtion to display the button that shows filters
-function showFilBtn(){
-    document.getElementById('filersDiv').classList.add('hidden');
-    document.getElementById('filtersBtn').classList.remove('hidden');
-    document.getElementById('hideFiltersBtn').classList.add('hidden');
+async function discoverFilms() {
+    let method = 'disc';
+    let genId = document.getElementById('genreSel').value;
+    let url = `${baseURL}discover/movie?api_key=${key}&with_genres=${genId}&page=${page}`;
+    await loadDiscData(url);
+    populateSearchData(filmsObjBuild(fetchResult));
+    createPagination(totalPages, page, method);
+    page = 1;
 }

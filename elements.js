@@ -17,21 +17,27 @@ function populateSearchData(filmsData) {
 }
 
 //function that builds pagination based on the passed parameters
-function createPagination(totalPages, page) {
+function createPagination(totalPages, page, method) {
     const paginEl = document.querySelector(".pagination ul");
+    let cFunc;
     let liTag = '';
     let active;
-    totalPages = totalPages;
     let beforePage = page - 1;
     let afterPage = page + 1;
+    totalPages = totalPages;
+    if (method === 'disc') {
+        cFunc = 'discoverFilms()'
+    } else {
+        cFunc = 'search()'
+    }
 
     //Show the button 'prev' if the page is greater than 1
     if (page > 1) {
-        liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1}), page=${page - 1}, search()"><span>Prev</span></li>`;
+        liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${page - 1}), page=${page - 1}, ${cFunc}"><span>Prev</span></li>`;
     }
     //Add 1st page if the current page is greater than 2
     if (page > 2) {
-        liTag += `<li class="first numb" onclick="createPagination(totalPages, 1), page=1, search()"><span>1</span></li>`;
+        liTag += `<li class="first numb" onclick="createPagination(totalPages, 1), page=1, ${cFunc}"><span>1</span></li>`;
         //Add '...' after the 1st page if  the current page is greater than 3
         if (page > 3) {
             liTag += `<li class="dots"><span>...</span></li>`;
@@ -75,7 +81,7 @@ function createPagination(totalPages, page) {
         } else { //else leave empty to the active variable
             active = "";
         }
-        liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength}), page=${plength}, search()"><span>${plength}</span></li>`;
+        liTag += `<li class="numb ${active}" onclick="createPagination(totalPages, ${plength}), page=${plength}, ${cFunc}"><span>${plength}</span></li>`;
     }
 
 
@@ -86,25 +92,45 @@ function createPagination(totalPages, page) {
         if (page < totalPages - 2) {
             liTag += `<li class="dots"><span>...</span></li>`;
         }
-        liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages}), page=${totalPages}, search()"><span>${totalPages}</span></li>`;
+        liTag += `<li class="last numb" onclick="createPagination(totalPages, ${totalPages}), page=${totalPages}, ${cFunc}"><span>${totalPages}</span></li>`;
     }
 
     //Show the 'next' button if the current page is less than total pages
     if (page < totalPages) {
-        liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1}), page=${page + 1}, search()"><span>Next</span></li>`;
+        liTag += `<li class="btn next" onclick="createPagination(totalPages, ${page + 1}), page=${page + 1}, ${cFunc}"><span>Next</span></li>`;
     }
     //Add pagination elements html into the ul tag
     paginEl.innerHTML = liTag;
 }
 
 //building the genres dropdown
-function genreDropBuild(genArray) {
+async function genreDropBuild(genArray) {
     const genreDropVar = document.getElementById('genreSel');
     let selHtml = `<option value=''>Any</option>`;
-    console.log('gen', genArray)
     genArray.forEach(element => {
         selHtml += `<option value=${element.id}>${element.name}</option>`
-       
+
     })
     genreDropVar.innerHTML = selHtml;
+}
+
+//function to clear the search results
+function clearSrch() {
+    document.getElementById('srchResDiv').innerHTML = '';
+    document.querySelector(".pagination ul").innerHTML = '';
+    document.getElementById("srchInp").value = '';
+}
+
+//function to show filters
+async function showDisc() {
+    await loadGenres();
+    await genreDropBuild(genres);
+    document.getElementById('filersDiv').classList.remove('hidden');
+    document.getElementById('srchDiv').classList.add('hidden');
+}
+
+//funtion to display the button that shows filters
+function showSrch() {
+    document.getElementById('filersDiv').classList.add('hidden');
+    document.getElementById('srchDiv').classList.remove('hidden');
 }
