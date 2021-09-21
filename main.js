@@ -12,21 +12,33 @@ let page = 1;
 
 //takes the input value and search DB with it
 let search = async function () {
-    clearSrch;
-
+    let title;
+    let savedTitl = sessionStorage.getItem('savedTitle');
+    let srchInpVal = document.getElementById("srchInp").value;
     let method = 'search';
-    let title = document.getElementById("srchInp").value;
+    if (srchInpVal !== '') {
+        title = srchInpVal;
+    } else {
+        title = savedTitl;
+    }
+    console.log('ttle', srchInpVal.length)
     let url = `${baseURL}search/movie?api_key=${key}&query=${title}&page=${page}`;
+
+    sessionStorage.setItem('savedPage', page);
+    sessionStorage.setItem('savedTitle', title);
+
+    clearSrch();
 
     await loadData(url);
     populateSearchData(filmsObjBuild(fetchResult));
     createPagination(totalPages, page, method);
+
     page = 1;
 }
 
 //get top Films
 async function topFilms() {
-    clearSrch;
+    clearSrch();
     let filmsNumber = document.getElementById('topFilms').value;
     let url = `${baseURL}movie/top_rated?api_key=${key}&language=en-US&page=1`;
     await loadData(url);
@@ -35,10 +47,13 @@ async function topFilms() {
 }
 
 async function discoverFilms() {
+    clearSrch();
+
     let method = 'disc';
     let genId = document.getElementById('genreSel').value;
     let url = `${baseURL}discover/movie?api_key=${key}&with_genres=${genId}&page=${page}`;
-    await loadDiscData(url);
+
+    await loadData(url);
     populateSearchData(filmsObjBuild(fetchResult));
     createPagination(totalPages, page, method);
     page = 1;

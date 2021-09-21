@@ -5,3 +5,4 @@ document.getElementById('clearBtn').addEventListener('click', clearSrch);
 document.getElementById('filtersBtn').addEventListener('click', showDisc);
 document.getElementById('hideFiltersBtn').addEventListener('click', showSrch);
 document.getElementById('genreSel').addEventListener('change', discoverFilms);
+window.onload = popInData();

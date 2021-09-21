@@ -1,11 +1,11 @@
 
 
 //populates the result data into the result Div
-function populateSearchData(filmsData) {
+async function populateSearchData(filmsData) {
     const srchResDivVar = document.getElementById('srchResDiv');
     let divHtml = '';
 
-    filmsData.forEach(element => {
+    await filmsData.forEach(element => {
         if (element.image != baseImgUrl + 'null') {
             divHtml += `<h2>${element.title}</h2>
             <img src="${element.image}">
@@ -14,6 +14,7 @@ function populateSearchData(filmsData) {
         }
     })
     srchResDivVar.innerHTML = divHtml;
+    sessionStorage.setItem('savedRes', divHtml);
 }
 
 //function that builds pagination based on the passed parameters
@@ -101,6 +102,7 @@ function createPagination(totalPages, page, method) {
     }
     //Add pagination elements html into the ul tag
     paginEl.innerHTML = liTag;
+    sessionStorage.setItem('savedPag', liTag);
 }
 
 //building the genres dropdown
@@ -119,6 +121,8 @@ function clearSrch() {
     document.getElementById('srchResDiv').innerHTML = '';
     document.querySelector(".pagination ul").innerHTML = '';
     document.getElementById("srchInp").value = '';
+    sessionStorage.setItem('savedRes', '');
+    sessionStorage.setItem('savedPag', '');
 }
 
 //function to show filters
@@ -133,4 +137,15 @@ async function showDisc() {
 function showSrch() {
     document.getElementById('filersDiv').classList.add('hidden');
     document.getElementById('srchDiv').classList.remove('hidden');
+}
+
+//populate initial data into elements
+async function popInData() {
+    if (sessionStorage.getItem('savedRes') != '') {
+        const srchResDivVar = document.getElementById('srchResDiv');
+        const paginEl = document.querySelector(".pagination ul");
+
+        paginEl.innerHTML = sessionStorage.getItem('savedPag');
+        srchResDivVar.innerHTML = sessionStorage.getItem('savedRes');
+    }
 }
